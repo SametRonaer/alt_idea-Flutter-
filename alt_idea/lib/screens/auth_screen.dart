@@ -7,6 +7,19 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
+  double deviceHeight;
+  double deviceWidth;
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    deviceWidth = MediaQuery.of(context).size.width;
+    deviceHeight = MediaQuery.of(context).size.height;
+    print(deviceHeight);
+    print(deviceWidth);
+  }
+
   final String signUpText =
       "Create a profile as a student or a person who wants to enter to this world of ideas.";
   final String signInText =
@@ -19,12 +32,12 @@ class _AuthScreenState extends State<AuthScreen> {
         child: Column(
           children: [
             Container(
-              height: 250,
+              height: deviceHeight / 3.32,
               width: double.infinity,
               color: Colors.black,
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
+                padding: EdgeInsets.symmetric(
+                    horizontal: deviceWidth / 25.6, vertical: 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -32,8 +45,10 @@ class _AuthScreenState extends State<AuthScreen> {
                     Flexible(
                       flex: 4,
                       child: Padding(
-                        padding: const EdgeInsets.only(
-                            top: 40.0, right: 30, left: 30),
+                        padding: EdgeInsets.only(
+                            top: deviceHeight / 20,
+                            right: deviceWidth / 15,
+                            left: deviceWidth / 15),
                         child: Image.asset(
                             "assets/images/alt_idea_logo_white.png"),
                       ),
@@ -44,17 +59,19 @@ class _AuthScreenState extends State<AuthScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(
-                            _isSignUp ? "Create an Account" : "Welcome Back!",
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontFamily: "AcuminPro",
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 1),
+                          Expanded(
+                            child: Text(
+                              _isSignUp ? "Create an Account" : "Welcome Back!",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontFamily: "AcuminPro",
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1),
+                            ),
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: deviceHeight / 80),
                           Text(
                             _isSignUp ? signUpText : signInText,
                             style: TextStyle(
@@ -72,7 +89,7 @@ class _AuthScreenState extends State<AuthScreen> {
             ),
             Container(
               width: double.infinity,
-              height: 20,
+              height: deviceHeight / 40,
               padding: EdgeInsets.all(0),
               child: Container(
                 alignment: Alignment.center,
@@ -84,7 +101,7 @@ class _AuthScreenState extends State<AuthScreen> {
             ),
             AuthForm(switchAuthScreenFormat),
             Container(
-              height: 50,
+              height: deviceHeight / 16.4,
               padding: EdgeInsets.all(0),
               width: double.infinity,
               color: Colors.black,

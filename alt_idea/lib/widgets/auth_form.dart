@@ -9,16 +9,27 @@ class AuthForm extends StatefulWidget {
 }
 
 class _AuthFormState extends State<AuthForm> {
-  double _sizedBoxHeight = 20;
+  double _sizedBoxHeight;
   bool _isSignUp = false;
+  double _deviceHeight;
+  double _deviceWidth;
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    _deviceHeight = MediaQuery.of(context).size.height;
+    _deviceWidth = MediaQuery.of(context).size.width;
+    _sizedBoxHeight = _deviceHeight / 40;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
-      margin: EdgeInsets.symmetric(horizontal: 20),
+      margin: EdgeInsets.symmetric(horizontal: _deviceWidth / 20),
       child: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: EdgeInsets.all(_deviceHeight / 55),
         child: Form(
           child: Column(
             //mainAxisSize: MainAxisSize.min,
@@ -68,7 +79,7 @@ class _AuthFormState extends State<AuthForm> {
               if (!_isSignUp)
                 Row(
                   children: [
-                    SizedBox(width: 200),
+                    SizedBox(width: _deviceWidth / 2.1),
                     TextButton(
                         child: Text(
                       "Forgot Password?",
@@ -81,13 +92,14 @@ class _AuthFormState extends State<AuthForm> {
                   ],
                 ),
               if (_isSignUp) getTextFormField("Confirm Password", true),
-              SizedBox(height: 14),
+              SizedBox(height: _deviceHeight / 58.57),
               if (_isSignUp)
                 Text(
                   "By clicking sign up you are agreeing our Terms and that you have read Our Data Policy including our Cookie Use.",
                   style: TextStyle(fontSize: 10),
                 ),
-              SizedBox(height: _isSignUp ? 20 : 40),
+              SizedBox(
+                  height: _isSignUp ? _deviceHeight / 40 : _deviceHeight / 20),
               ElevatedButton(
                 child: Text(
                   _isSignUp ? "SIGN UP" : "SIGN IN",
@@ -96,7 +108,7 @@ class _AuthFormState extends State<AuthForm> {
                 ),
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                    minimumSize: Size(210, 48),
+                    minimumSize: Size(_deviceWidth / 2, _deviceHeight / 17),
                     primary: Colors.white,
                     enableFeedback: true,
                     shape: RoundedRectangleBorder(
@@ -104,7 +116,7 @@ class _AuthFormState extends State<AuthForm> {
                       borderRadius: BorderRadius.circular(25),
                     )),
               ),
-              if (!_isSignUp) SizedBox(height: 50),
+              if (!_isSignUp) SizedBox(height: _deviceHeight / 16.4),
             ],
           ),
         ),
